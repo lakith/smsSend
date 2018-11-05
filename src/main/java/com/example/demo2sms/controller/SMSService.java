@@ -119,7 +119,8 @@ public class SMSService {
     public void sendMessageTry(){
         HttpHeaders headers = new HttpHeaders();
         RestTemplate restTemplate = new RestTemplate();
-        headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
+        //headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
+        headers.setContentType(MediaType.APPLICATION_JSON);
 
         SmsDTO smsDTO = new SmsDTO();
         smsDTO.setPassword("ndb123");
