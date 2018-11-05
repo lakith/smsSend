@@ -16,12 +16,29 @@ public class SMSController {
     @GetMapping("sendSms")
     public ResponseEntity<?> sendSms(){
         smssErvice.sendSMS();
+        System.out.println("1 function");
         return new ResponseEntity<>("success",HttpStatus.OK);
     }
 
     @GetMapping("sendSms2")
     public ResponseEntity<?> sendSms2() {
         smssErvice.sendSms2();
+        System.out.println("2 function");
         return new ResponseEntity<>("success", HttpStatus.OK);
     }
+
+    @GetMapping("sendSms3")
+    public ResponseEntity<?> sendSms3() {
+        smssErvice.smsSend3();
+        System.out.println("3 function");
+        return new ResponseEntity<>("success", HttpStatus.OK);
+    }
+
+    @GetMapping("sendSms4")
+    public ResponseEntity<?> sendSms4() {
+        smssErvice.smsSend4();
+        System.out.println("4 function");
+        return new ResponseEntity<>("success", HttpStatus.OK);
+    }
+
 }
