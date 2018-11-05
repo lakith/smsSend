@@ -25,7 +25,7 @@ public class SMSService {
         MultiValueMap<String, String> map= new LinkedMultiValueMap<>();
         map.add("password", "ndb123");
         map.add("message", "hello world");
-        map.add("destinationAddresses","[\"tel:94702122500\"]");
+        map.add("destinationAddresses","[\"tel:94773621315\"]");
         map.add("applicationId","APP_000001");
 
 
@@ -47,7 +47,7 @@ public class SMSService {
                 "\n" +
                 "  \"password\": \"ndb123\",\n" +
                 "\n" +
-                "  \"destinationAddresses\": [\"tel:94773820436\"],\n" +
+                "  \"destinationAddresses\": [\"tel:94773621315\"],\n" +
                 "\n" +
                 "  \"message\": \"hello world\",\n" +
                 "\n" +
@@ -73,7 +73,7 @@ public class SMSService {
         Map req_payload = new HashMap();
         req_payload.put("password", "ndb123");
         req_payload.put("message", "hello world");
-        req_payload.put("destinationAddresses","[\"tel:94702122500\"]");
+        req_payload.put("destinationAddresses","[\"tel:94773621315\"]");
         req_payload.put("applicationId","APP_000001");
 
         HttpEntity<?> request = new HttpEntity<>(req_payload, headers);
@@ -97,7 +97,7 @@ public class SMSService {
         HttpEntity<String> entity = new HttpEntity(smsDTO, headers);
 
         List<String> stringList = new ArrayList<>();
-        stringList.add("[tel:94773820436]");
+        stringList.add("[tel:94773621315]");
 
         RestTemplate restTemplate = new RestTemplate();
         restTemplate.postForObject( uri, entity, String.class);
