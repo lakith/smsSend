@@ -1,4 +1,5 @@
 com\example\demo2sms\controller\SmsDTO.class
+com\example\demo2sms\controller\SMS2.class
 com\example\demo2sms\controller\SMSController.class
 com\example\demo2sms\controller\SMSService.class
 com\example\demo2sms\Demo2smsApplication.class

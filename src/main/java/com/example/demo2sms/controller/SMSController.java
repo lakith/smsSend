@@ -55,4 +55,13 @@ public class SMSController {
         return new ResponseEntity<>("success", HttpStatus.OK);
     }
 
+    @GetMapping("sendSms7")
+    public ResponseEntity<?> sendSms7() throws Exception {
+        smssErvice.sendMessageTry2();
+        System.out.println("7 function");
+        return new ResponseEntity<>("success", HttpStatus.OK);
+    }
+
+
+
 }

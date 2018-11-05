@@ -93,7 +93,7 @@ public class SMSService {
         HttpEntity<String> entity = new HttpEntity(smsDTO, headers);
 
         List<String> stringList = new ArrayList<>();
-        stringList.add("[tel:94773621315]");
+        stringList.add("tel:94773621315");
 
         RestTemplate restTemplate = new RestTemplate();
         restTemplate.postForObject( uri, entity, String.class);
@@ -128,7 +128,7 @@ public class SMSService {
         smsDTO.setApplicationId("APP_000001");
 
         List<String> stringList = new ArrayList<>();
-        stringList.add("[tel:94773621315]");
+        stringList.add("tel:94773621315");
 
 
 
@@ -137,6 +137,44 @@ public class SMSService {
         restTemplate.exchange(
                 "http://10.96.198.25:7000/sms/send", HttpMethod.POST, entity, String.class).getBody();
     }
+
+    public void sendMessageTry2(){
+        HttpHeaders headers = new HttpHeaders();
+        RestTemplate restTemplate = new RestTemplate();
+        //headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
+        headers.setContentType(MediaType.APPLICATION_JSON);
+
+        SMS2 smsDTO = new SMS2();
+        smsDTO.setPassword("ndb123");
+        smsDTO.setMessage("hello world");
+        smsDTO.setApplicationId("APP_000001");
+        smsDTO.setDestinationAddresses("[tel:94773621315]");
+
+        HttpEntity<SMS2> entity = new HttpEntity<SMS2>(smsDTO,headers);
+
+        restTemplate.exchange(
+                "http://10.96.198.25:7000/sms/send", HttpMethod.POST, entity, String.class).getBody();
+    }
+
+/*    public void sendMessage2(){
+
+        RestTemplate rest = new RestTemplate();
+
+        String s = "{\n" +
+                "\n" +
+                "  \"password\": \"ndb123\",\n" +
+                "\n" +
+                "  \"destinationAddresses\": [\"tel:94773820436\"],\n" +
+                "\n" +
+                "  \"message\": \"hello world\",\n" +
+                "\n" +
+                "  \"applicationId\":\"APP_000001\",\n" +
+                "}";
+
+        ResponseEntity<SmsDTO> response = rest
+                .exchange("http://10.96.198.25:7000/sms/send", HttpMethod.POST, smsDTO, String.class);
+        assertThat(response.getStatusCode(), is(HttpStatus.CREATED));
+    }*/
 
     public void sendRequest() throws Exception {
 
