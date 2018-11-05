@@ -18,4 +18,10 @@ public class SMSController {
         smssErvice.sendSMS();
         return new ResponseEntity<>("success",HttpStatus.OK);
     }
+
+    @GetMapping("sendSms2")
+    public ResponseEntity<?> sendSms2() {
+        smssErvice.sendSms2();
+        return new ResponseEntity<>("success", HttpStatus.OK);
+    }
 }
