@@ -8,10 +8,7 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Service
 public class SMSService {
@@ -24,7 +21,7 @@ public class SMSService {
         MultiValueMap<String, String> map= new LinkedMultiValueMap<>();
         map.add("password", "ndb123");
         map.add("message", "hello world");
-        map.add("destinationAddresses","[\"tel:94773621315\"]");
+        map.add("destinationAddresses","['\"tel:94773621315\"]");
         map.add("applicationId","APP_000001");
 
 
@@ -50,7 +47,7 @@ public class SMSService {
                 "\n" +
                 "  \"message\": \"hello world\",\n" +
                 "\n" +
-                "  \"applicationId\":\"APP_000001\",\n" +
+                "  \"applicationId\": \"APP_000001\",\n" +
                 "}";
         System.out.println("4");
         HttpEntity<String> entity = new HttpEntity<>(s, headers);
@@ -117,6 +114,27 @@ public class SMSService {
                 "}";
 
         System.out.println(s);
+    }
+
+    public void sendMessageTry(){
+        HttpHeaders headers = new HttpHeaders();
+        RestTemplate restTemplate = new RestTemplate();
+        headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
+
+        SmsDTO smsDTO = new SmsDTO();
+        smsDTO.setPassword("ndb123");
+        smsDTO.setMessage("hello world");
+        smsDTO.setApplicationId("APP_000001");
+
+        List<String> stringList = new ArrayList<>();
+        stringList.add("[tel:94773621315]");
+
+
+
+        HttpEntity<SmsDTO> entity = new HttpEntity<SmsDTO>(smsDTO,headers);
+
+        restTemplate.exchange(
+                "http://10.96.198.25:7000/sms/send", HttpMethod.POST, entity, String.class).getBody();
     }
 
     public void sendRequest() throws Exception {
