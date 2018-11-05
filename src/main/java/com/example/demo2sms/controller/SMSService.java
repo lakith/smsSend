@@ -1,12 +1,11 @@
 package com.example.demo2sms.controller;
 
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
+import com.fasterxml.jackson.databind.util.JSONPObject;
+import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
+import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
@@ -32,7 +31,7 @@ public class SMSService {
         HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<MultiValueMap<String, String>>(map, headers);
 
         ResponseEntity<String> response = restTemplate.postForEntity("http://10.96.198.25:7000/sms/send", request , String.class );
-        System.out.println(request);
+        System.out.println(response);
     }
 
     public void sendSms2(){
@@ -118,5 +117,33 @@ public class SMSService {
                 "}";
 
         System.out.println(s);
+    }
+
+    public void sendRequest() throws Exception {
+
+        try {
+            RestTemplate rest = new RestTemplate();
+            String s = "{\n" +
+                    "\n" +
+                    "  \"password\": \"ndb123\",\n" +
+                    "\n" +
+                    "  \"destinationAddresses\": [\"tel:94773621315\"],\n" +
+                    "\n" +
+                    "  \"message\": \"hello world\",\n" +
+                    "\n" +
+                    "  \"applicationId\":\"APP_000001\",\n" +
+                    "}";
+
+            HttpHeaders headers = new HttpHeaders();
+            headers.set("Content-Type", "application/json");
+
+            HttpEntity<String> entity = new HttpEntity<>(s, headers);
+            ResponseEntity<Object> exchange = rest.exchange("http://10.96.198.25:7000/sms/send", HttpMethod.POST, entity, Object.class);
+            System.out.println(exchange);
+        } catch (HttpClientErrorException e) {
+            throw new Exception(e.getCause());
+        } catch (Exception err) {
+            throw new Exception(err.getCause());
+        }
     }
 }
